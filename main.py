@@ -22,3 +22,6 @@ def not_found(e):
 @app.errorhandler(500)
 def serv_err(e):
     return "error 500", 500
+
+
+#dawadwdaw
