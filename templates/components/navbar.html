@@ -1,0 +1,42 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 w-auto shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{url_for('home')}}"><strong>KAZEXPRESS</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+                <div class="input-group">
+                    <span class="border-warning input-group-text bg-warning text-white"><i class="fa fa-search"
+                            style="color:white !important; 
+                            font: normal normal normal 24px/1 FontAwesome;"></i></span>
+                    <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+                    <button class="btn btn-warning text-white">Find</button>
+                </div>
+            </div>
+            <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="ms-auto w-50 d-none d-lg-block">
+                    <div class="input-group">
+                        <span class="border-warning input-group-text bg-warning text-white"><i class="fa fa-search"
+                                style="color:white !important; font: normal normal normal 24px/1 FontAwesome;"></i></span>
+                        <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+                        <button class="btn btn-warning text-white">Find</button>
+                    </div>
+                </div>
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('orders', user_id=2) }}"><i class="fa fa-inbox" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('cart', user_id=2) }}"><i class="fa fa-shopping-cart" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('login') }}"><i class="fa fa-user" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ORDERS
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h1>Your orders.</h1>
+
+    <div class="d-flex">
+        {% if true %}
+        {% for i in range(3) %}
+        {% include 'components/productcard.html' %}
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

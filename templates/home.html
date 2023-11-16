@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+HOME
+{% endblock %}
+
+
+{% block content %}
+{% include "components/categories.html" %}
+
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 d-flex flex-column gap-3">
+                <h1 class="display-6 fw-bold">ONLY TODAY!</h1>
+                <p>By click on the following you will be able to get on of the TOP 25 products. Here is
+                    some text to
+                    fill text field and make it longer and etc. Here is some text to fill text field and make it longer
+                    and etc.</p>
+                <a href="{{url_for('topsales')}}" class="btn btn-success w-25">GET IT NOW!</a>
+            </div>
+            <div class="col-sm-3">
+                <img class="rounded float-end img-fluid" src="{{ url_for('static',filename='media/hot-banner.jpg') }}"
+                    alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container d-flex flex-wrap py-5 justify-content-center">
+
+    {% for i in range(5) %}
+    {% include "components/productcard.html" %}
+    {% endfor %}
+
+
+</div>
+
+<div class="container w-50 d-flex">
+    <a href="" class="bg-secondary fs-3 w-100 h-100 text-center btn" style="color:white"><span class="m-auto">Show
+            more</span></a>
+</div>
+
+{% endblock %}
