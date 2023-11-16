@@ -1,0 +1,122 @@
+/* BASIC */
+a:hover {
+  opacity: 0.8;
+}
+
+.fa {
+  display: inline-block;
+  color: #ffc107;
+  border-radius: 5px;
+}
+
+/* BANNER */
+.banner {
+  background-color: #ffc107;
+  width: 100%;
+  padding: 25px;
+}
+
+.btn {
+  padding: 0.5em 1.5em;
+  border-radius: 2em;
+  box-shadow: 5px 5px 5px rgba(105, 73, 73, 0.15);
+}
+
+@media screen and (max-width: 567px) {
+  .banner {
+    text-align: center;
+  }
+}
+
+.banner img {
+  width: 200px;
+  height: 200px;
+}
+
+/* CATEGORIES */
+.dropdown-hover:hover>.dropdown-menu {
+  display: inline-block;
+}
+
+.dropdown-hover>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+/* Product card */
+.image {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+}
+
+.main-heading {
+
+  font-size: 40px;
+  color: red !important;
+}
+
+.ratings i {
+
+  color: orange;
+
+}
+
+.user-ratings h6 {
+  margin-top: 2px;
+}
+
+.colors {
+  display: flex;
+  margin-top: 2px;
+}
+
+.colors span {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  margin-right: 6px;
+}
+
+.colors span:nth-child(1) {
+
+  background-color: red;
+
+}
+
+.colors span:nth-child(2) {
+
+  background-color: blue;
+
+}
+
+.colors span:nth-child(3) {
+
+  background-color: yellow;
+
+}
+
+.colors span:nth-child(4) {
+
+  background-color: purple;
+
+}
+
+.btn-warning {
+
+  height: 48px;
+  font-size: 18px;
+}
+
+/* SIDEBAR */
+.sidebar i, span {
+  color: #e9ab01;
+  font-weight: bolder;
+  transition: all .3s ease;
+}
+
+.sidebar i:hover, span:hover {
+  color: blue;
+}
