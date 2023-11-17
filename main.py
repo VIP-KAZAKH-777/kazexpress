@@ -1,18 +1,34 @@
-from flask import render_template
-from app import app
+from flask import render_template, redirect, url_for, flash
+from app import app, db
+from models.forms import LoginForm, RegisterForm
+from models.tables import Login
 
 #Routes
 @app.route('/')
 def home():
+    data = Login.query.filter_by(uid=0)
+    user = Login(uid=2, username='hellowlrld', password='nothelloworld')
+    db.session.add(user)
+    db.session.commit()
     return render_template('home.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, password={}'.format(
+            form.username.data, form.password.data))
+        return redirect(url_for('login'))
+    return render_template('login.html', form=form)
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def register():
-    return render_template('register.html')
+    form = RegisterForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, password={}'.format(
+            form.username.data, form.password.data))
+        return redirect(url_for('register'))
+    return render_template('register.html', form=form)
 
 @app.route('/cart/<user_id>')
 def cart(user_id):

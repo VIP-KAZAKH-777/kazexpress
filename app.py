@@ -1,5 +1,7 @@
 from dotenv import dotenv_values
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 
 #Create a Flask instance
 app = Flask(__name__)
@@ -7,3 +9,7 @@ app = Flask(__name__)
 #Configure app
 env_values = dotenv_values('.env')
 app.config['SECRET_KEY'] = env_values['FLASK_SECRET_KEY']
+
+#FOR DATABASE
+app.config['SQLALCHEMY_DATABASE_URI'] = env_values['MYSQL_CONNECTION']
+db = SQLAlchemy(app)
