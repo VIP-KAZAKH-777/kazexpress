@@ -1,23 +1,20 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, session
 from app import app, db
 from models.forms import LoginForm, RegisterForm
 from models.tables import Login
+import models.crud
 
 #Routes
 @app.route('/')
 def home():
-    data = Login.query.filter_by(uid=0)
-    user = Login(uid=2, username='hellowlrld', password='nothelloworld')
-    db.session.add(user)
-    db.session.commit()
     return render_template('home.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash('Login requested for user {}, password={}'.format(
-            form.username.data, form.password.data))
+        #MUST CHANGE HERE
+        result = models.crud.login(form.username.data, form.password.data)
         return redirect(url_for('login'))
     return render_template('login.html', form=form)
 
@@ -25,8 +22,7 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        flash('Login requested for user {}, password={}'.format(
-            form.username.data, form.password.data))
+        flash(models.crud.register(form.username.data, form.password.data))
         return redirect(url_for('register'))
     return render_template('register.html', form=form)
 
