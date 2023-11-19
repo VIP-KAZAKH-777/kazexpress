@@ -12,38 +12,32 @@ JOHN
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-3 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        <a href="#" onclick="home()" class="nav-link align-middle px-0">
+                            <i class="fs-3 bi-house"></i> <span class="ms-1 d-none d-sm-inline ">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="#submenu1" onclick="profile()" data-bs-toggle="collapse"
+                            class="nav-link px-0 align-middle">
                             <i class="fs-3 bi-person-lines-fill"></i> <span
-                                class="ms-1 d-none d-sm-inline">Profile</span>
+                                class="ms-1 d-none d-sm-inline rightbar">Profile</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="#" onclick="delivery()" class="nav-link px-0 align-middle">
                             <i class="fs-3 bi-truck"></i> <span class="ms-1 d-none d-sm-inline">Delivery
                                 address</span></a>
                     </li>
                     <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                        <a href="#submenu2" onclick="card()" data-bs-toggle="collapse"
+                            class="nav-link px-0 align-middle">
                             <i class="fs-3 bi-credit-card"></i> <span class="ms-1 d-none d-sm-inline">Cards</span></a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-3 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
                         <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
+                            <li>
                                 <a href="{{url_for('topsales')}}" class="nav-link px-0"> <span
                                         class="d-none d-sm-inline">Top 25</span></a>
                             </li>
@@ -60,8 +54,7 @@ JOHN
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
-                    <a href="{{url_for('logout')}}"
-                        class="d-flex align-items-center text-white text-decoration-none">
+                    <a href="{{url_for('logout')}}" class="d-flex align-items-center text-white text-decoration-none">
                         <i class="fs-3 bi-box-arrow-right"></i>
                         <span class="d-none d-sm-inline mx-1">Logout</span>
                     </a>
@@ -69,20 +62,232 @@ JOHN
             </div>
         </div>
         <!-- CONTENT -->
-        <div class="col py-3">
-            <h3>Welcome {{user.name | capitalize}}!</h3>
-            <p class="lead">
-                An example 2-level sidebar with collasible menu items. The menu functions like an "accordion" where only
-                a single
-                menu is be open at a time. While the sidebar itself is not toggle-able, it does responsively shrink in
-                width on smaller screens.</p>
-            <ul class="list-unstyled">
-                <li>
-                    <h5>Responsive</h5> shrinks in width, hides text labels and collapses to icons only on mobile
-                </li>
-            </ul>
+        <div class="col py-3 w-100">
+            <div class="content-home ">
+                <h3>Welcome <span class="text-warning">{{user.name | capitalize}}</span>!</h3>
+                <p class="lead">
+                    We are delighted to have you join our community. Whether you're a new user or returning, we're
+                    excited
+                    to embark on this journey with you. At [Your Platform/Service Name], we strive to create an
+                    environment
+                    that fosters creativity, learning, and connection.
+                    <hr>
+                    Here's what you can expect:
+                </p>
+                <ul class="list-unstyled gap-3 d-flex flex-column">
+                    <li>
+                        <h5>Explore and Discover:</h5>
+                        Dive into a world of possibilities! Navigate through our user-friendly interface to discover the
+                        features and services we offer. From [Key Feature 1] to [Key Feature 2], we have designed [Your
+                        Platform/Service Name] with you in mind.
+                    </li>
+                    <li>
+                        <h5>Connect and Engage:</h5>
+                        Connect with like-minded individuals and make new friends. Join discussions, share your
+                        thoughts,
+                        and engage with the community. [Your Platform/Service Name] is not just a platform; it's a space
+                        for
+                        collaboration and meaningful connections.
+                    </li>
+                    <li>
+                        <h5>Learn and Grow:</h5>
+                        Whether you're here for entertainment, education, or personal development, [Your
+                        Platform/Service
+                        Name] has resources to help you learn and grow. Take advantage of [Feature 1], [Feature 2], and
+                        more
+                        to enhance your experience.
+                    </li>
+                    <li>
+                        <h5>Stay Informed:</h5>
+                        We value transparency and want to keep you in the loop. Stay updated on the latest news,
+                        updates,
+                        and announcements from [Your Platform/Service Name]. We believe in keeping our community
+                        informed
+                        and involved.
+                    </li>
+                    <li>
+                        <h5>Customer Support:</h5>
+                        Have questions or need assistance? Our dedicated support team is here to help. Reach out to us
+                        through [Contact Method] for prompt and friendly assistance.
+                    </li>
+                </ul>
+                <hr>
+                <p class="lead">
+                    Thank you for choosing [Your Platform/Service Name]. Your presence enriches our community, and we
+                    look
+                    forward to seeing the amazing contributions and experiences you'll bring to [Your Platform/Service
+                    Name].
+                </p>
+            </div>
+            <div class="content-profile ">
+                <section>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body text-center">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                        alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                    <h5 class="my-3">John Smith</h5>
+                                    <p class="text-muted mb-1">Full Stack Developer</p>
+                                    <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <button type="button" class="btn btn-warning">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Full Name</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">Johnatan Smith</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Email</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">example@example.com</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Phone</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">(097) 234-5678</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Mobile</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">(098) 765-4321</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Address</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="content-delivery ">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col">
+                        <div class="card">
+                            <div class="row g-0">
+                                <div class="col-xl-5">
+                                    <div class="card-body p-md-5 text-black">
+                                        <h4 class="mb-4 text-uppercase">Delivery Info</h4>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Example1m">First name</label>
+                                                    <input type="text" id="form3Example1m" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Example1n">Last name</label>
+                                                    <input type="text" id="form3Example1n" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form3Example8">Address</label>
+                                            <input type="text" id="form3Example8" class="form-control"
+                                                placeholder="Address" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label">State</label>
+                                                <select class="form-select">
+                                                    <option value="1">State</option>
+                                                    <option value="2">Option 1</option>
+                                                    <option value="3">Option 2</option>
+                                                    <option value="4">Option 3</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label">City</label>
+                                                <select class="form-select">
+                                                    <option value="1">City</option>
+                                                    <option value="2">Option 1</option>
+                                                    <option value="3">Option 2</option>
+                                                    <option value="4">Option 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form3Example3">Zip</label>
+                                            <input type="text" id="form3Example3" class="form-control" />
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form3Example2">Email</label>
+                                            <input type="text" id="form3Example2" class="form-control" />
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <a type="button" class="btn btn-warning ms-2">Save</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-card ">
+                <div class="d-flex">
+                    <div class="card p-4 w-100">
+                        <div>
+                            <h4 class="heading">Here are your payment methods.</h4>
+                            <p class="text">Please make the payment to start enjoying all the features of our premium
+                                plan as soon as possible</p>
+                        </div>
+                        <h5>Payment details</h5>
+                        <div class="credit rounded mt-4 d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <i class="fs-3 bi-credit-card me-3"></i>
+                                <div class="d-flex flex-column ml-3">
+                                    <h6 class="business">Credit Card</h6>
+                                    <h6 class="plan">1234 XXXX XXXX 2570</h6>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="#"><i class="fs-3 bi-trash"></i></a>
+                            </div>
+                        </div>
+
+                        <a href="#" class="mt-4 text-decoration-none text-primary">ADD PAYMENT METHOD</a>
+                        <div class="mt-3">
+                            <button class="btn btn-primary btn-block payment-button">
+                                Make purchase <i class="fa fa-long-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<script src="{{url_for('static', filename='js/userpage.js')}}"></script>
 {% endblock %}

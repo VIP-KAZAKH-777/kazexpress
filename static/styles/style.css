@@ -117,6 +117,6 @@ a:hover {
   transition: all .3s ease;
 }
 
-.sidebar i:hover, span:hover {
-  color: blue;
+.sidebar a:hover {
+  background-color: blue;
 }
