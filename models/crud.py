@@ -5,18 +5,8 @@ from datetime import datetime
 def login(u:str, p:str):
     user = Login.query.filter_by(username=u).first()
     if user and user.check_password(p):
-        #HERE WHILL BE CHANGES
-        return {
-            "Result":"Welcome!",
-            "Authenticated":True,
-            "UID": user.uid,
-            "DATETIME": datetime.utcnow()
-        }
-        
-        #JUST FOR NOW, TOMORROW I WILL WRITE IT IN CORRECT WAY
-    return {
-            "Result":"Incorrect username or password."
-        }
+        return User.query.filter_by(uid = user.uid).first()
+    return None
 
 #Register
 def register(u:str, p:str):
@@ -31,5 +21,4 @@ def register(u:str, p:str):
     db.session.add(profile)
 
     db.session.commit()
-    #HERE CHANGES TOO
-    return ["Success", new_user.uid]
+    return "User created."
