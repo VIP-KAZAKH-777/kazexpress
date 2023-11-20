@@ -1,6 +1,6 @@
 from app import db
 import bcrypt
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import UserMixin
 
 class Login(db.Model, UserMixin):
     __tablename__="Login"
@@ -39,6 +39,33 @@ class User(db.Model, UserMixin):
 
     def get_id(self):
            return (self.uid)
+
+    def __repr__(self):
+        return '<Name: %r>' %self.name
+
+class Product(db.Model):
+    __tablename__="Product"
+    pid = db.Column(db.Integer, primary_key=True)
+    sid = db.Column(db.Integer)
+    category = db.Column(db.String(128))
+    price = db.Column(db.String(24))
+    name = db.Column(db.String(128))
+    description = db.Column(db.String(1024))
+    media = db.Column(db.String(1024))
+    characs = db.Column(db.Text())
+    reviews = db.Column(db.Text())
+    demand = db.Column(db.Integer)
+    stars = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Name: %r>' %self.name
+
+class Shop(db.Model):
+    __tablename__="Shop"
+    sid = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), unique=True)
+    rate = db.Column(db.Integer)
+    orders = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Name: %r>' %self.name

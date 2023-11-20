@@ -1,4 +1,4 @@
-from models.tables import Login, User, db
+from models.tables import Login, User, Product, db
 from datetime import datetime
 
 # Login
@@ -22,3 +22,54 @@ def register(u:str, p:str):
 
     db.session.commit()
     return "User created."
+
+#Update profile
+def update_profile(form, id):    
+    db.session.query(User).filter_by(uid = id).update({
+        User.name: form.fullname.data, 
+        User.email: form.email.data, 
+        User.phone: form.phone.data, 
+        User.address: form.address.data})     
+
+    try:
+        db.session.commit()
+        return "Profile updated!"    
+    except:
+        return "Something went wrong."
+    
+#Update delivery info
+def update_delivery(form, id):
+    db.session.query(User).filter_by(uid = id).update({
+        User.address: form.address.data, 
+        User.pcode: form.pcode.data})
+
+    try:
+        db.session.commit()
+        return "Delivery updated!"    
+    except:
+        return "Something went wrong."
+    
+#Create product (available only from request (look in api/local))
+def add_product(args):
+    product = Product(sid = args['sid'],
+                    category = args['category'],
+                    price = args['price'],
+                    name = args['name'],
+                    description = args['description'],
+                    media = args['media'],
+                    characs = args['characs'],
+                    reviews = args['reviews'],
+                    demand = args['demand'],
+                    stars = args['stars'])
+                    
+    db.session.add(product)
+    try:
+        db.session.commit()
+        return "Success!"
+    except:
+        return "Error, check serverside"
+    
+#Get all products in JSON
+def get_products():
+    result = Product.query.all()
+    return result

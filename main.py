@@ -1,10 +1,11 @@
 from flask import render_template, redirect, url_for, flash, session
-from app import app, db
-from models.forms import LoginForm, RegisterForm
+from app import app, api
+from models.forms import *
 from models.tables import Login, User
 import models.crud
-from flask_login import UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import login_user, login_required, logout_user, current_user
 from managers.loginmanager import login_manager
+from api.flask_api import Product
 
 #Routes
 @app.route('/')
@@ -41,24 +42,33 @@ def register():
         flash(result)
     return render_template('register.html', form=form)
 
-@app.route('/cart/<user_id>')
+@app.route('/cart/<int:user_id>')
 def cart(user_id):
     return render_template('cart.html')
 
-@app.route('/orders/<user_id>')
+@app.route('/orders/<int:user_id>')
 def orders(user_id):
     return render_template('orders.html')
 
-@app.route('/user/<user_id>')
+@app.route('/user/<int:user_id>', methods=["GET", "POST"])
 @login_required
 def userpage(user_id):
-    return render_template('userpage.html', user=current_user)
+    profile_form = ProfileForm()
+    delivery_form = DeliveryForm()
+    if profile_form.validate_on_submit():
+        flash(models.crud.update_profile(profile_form, user_id))
+    if delivery_form.validate_on_submit():
+        flash(models.crud.update_delivery(delivery_form, user_id))
+    return render_template('userpage.html', 
+                           user=current_user, 
+                           profile_form=profile_form,
+                           delivery_form=delivery_form)
 
 @app.route('/topsales')
 def topsales():
     return render_template('topsales.html')
 
-@app.route('/product/<p_id>')
+@app.route('/product/<int:p_id>')
 def productpage(p_id):
     return render_template('productpage.html')
 
@@ -80,3 +90,6 @@ def not_found(e):
 @app.errorhandler(500)
 def serv_err(e):
     return "error 500", 500
+
+#API
+api.add_resource(Product, "/api/product/<pid>")
