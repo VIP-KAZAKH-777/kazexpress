@@ -1,5 +1,5 @@
 {
-    "Everyday electronics":["Mobile Phone", "Laptop", "Accessorie", "Tablet", "Storage device"],
+    "Everyday electronics": ["Mobile Phone", "Laptop", "Accessorie", "Tablet", "Storage device"],
     "Specific electronics": ["Camera", "Microphone", "Game", "Drone", "3D Printing"],
     "Household": ["Cleaning Applience", "Household Applience", "Built-in Applience", "Tools", "Smart Home"],
     "Furniture": ["Office Furniture", "Home Furniture", "Outdoor Furniture", "Commercial Furniture", "Euromebel"]

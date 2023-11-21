@@ -26,46 +26,17 @@
 
                             <div class="container">
                                 <div class="row my-3">
+                                    {% for category in categories %}
                                     <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
                                         <div class="list-group list-group-flush">
-                                            <h5 class="list-group-item">Electronic</h5>
-                                            <a href="" class="list-group-item list-group-item-action">Mobile Phone</a>
-                                            <a href="" class="list-group-item list-group-item-action">Laptop</a>
-                                            <a href="" class="list-group-item list-group-item-action">Accessorie</a>
-                                            <a href="" class="list-group-item list-group-item-action">Tablet</a>
-                                            <a href="" class="list-group-item list-group-item-action">Storage device</a>
+                                            <h5 class="list-group-item">{{category}}</h5>
+                                            {% for category_item in categories[category] %}
+                                            <a href="{{url_for('categorized', c_name=category_item)}}" class="list-group-item list-group-item-action">{{category_item}}</a>
+                                            {% endfor %}
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-                                        <div class="list-group list-group-flush">
-                                            <h5 class="list-group-item">Electronic</h5>
-                                            <a href="" class="list-group-item list-group-item-action">Camera</a>
-                                            <a href="" class="list-group-item list-group-item-action">Microphone</a>
-                                            <a href="" class="list-group-item list-group-item-action">Game</a>
-                                            <a href="" class="list-group-item list-group-item-action">Drone</a>
-                                            <a href="" class="list-group-item list-group-item-action">3D Printing</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3 mb-3 mb-md-0">
-                                        <div class="list-group list-group-flush">
-                                            <h5 class="list-group-item">Electronic</h5>
-                                            <a href="" class="list-group-item list-group-item-action">Cleaning Applience</a>
-                                            <a href="" class="list-group-item list-group-item-action">Household Applience</a>
-                                            <a href="" class="list-group-item list-group-item-action">Built-in Applience</a>
-                                            <a href="" class="list-group-item list-group-item-action">Tools</a>
-                                            <a href="" class="list-group-item list-group-item-action">Smart Home</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="list-group list-group-flush">
-                                            <h5 class="list-group-item">Electronic</h5>
-                                            <a href="" class="list-group-item list-group-item-action">Office Furniture</a>
-                                            <a href="" class="list-group-item list-group-item-action">Home Furniture</a>
-                                            <a href="" class="list-group-item list-group-item-action">Outdoor Furniture</a>
-                                            <a href="" class="list-group-item list-group-item-action">Commercial Furniture</a>
-                                            <a href="" class="list-group-item list-group-item-action">Euromebel</a>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
+                                    
                                 </div>
                             </div>
                         </div>

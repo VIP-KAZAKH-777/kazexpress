@@ -7,16 +7,18 @@ category
 {% block content %}
 {% include 'components/categories.html' %}
 
-<h1 class="container">Find results for: Category</h1>
+<h1 class="container">Find results for: {{category}}</h1>
 
 <div class="container d-flex justify-content-center flex-wrap my-4">
-    {% for i in range(20) %}
-    {% include 'components/productcard.html' %}
+    {% for product in products %}
+        {% with product_card=product %}
+            {% include "components/productcard.html" %}
+        {% endwith %}
     {% endfor %}
 </div>
-
+<!-- 
 <div class="container w-50 d-flex">
     <a href="" class="bg-secondary fs-3 w-100 h-100 text-center btn" style="color:white"><span class="m-auto">Show
             more</span></a>
-</div>
+</div> -->
 {% endblock %}

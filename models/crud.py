@@ -101,3 +101,8 @@ def update_product(args):
         return "Product updated!"    
     except:
         return "Something went wrong."
+    
+#Get products by category
+def get_category(c_name):
+    result = db.session.query(Product).filter_by(category = c_name).all()
+    return result

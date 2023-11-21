@@ -7,6 +7,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from managers.loginmanager import login_manager
 from api.flask_api import Product
 from ast import literal_eval
+from models.categories import get_categories
 
 #Routes
 @app.route('/')
@@ -17,7 +18,7 @@ def home():
         mydict = literal_eval(i)
         products.append(mydict)
 
-    return render_template('home.html', products=products)
+    return render_template('home.html', products=products, categories = get_categories())
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -82,7 +83,12 @@ def productpage(p_id):
 
 @app.route('/category/<c_name>')
 def categorized(c_name):
-    return render_template('categorized.html')
+    product = models.crud.get_category(c_name)
+    products = []
+    for i in product:
+        mydict = literal_eval(str(i))
+        products.append(mydict)
+    return render_template('categorized.html', products = products, category = c_name, categories = get_categories())
 
 @app.route('/aboutus')
 def aboutus():
