@@ -12,7 +12,7 @@ api = Api(app)
 
 #Configure app
 env_values = dotenv_values('.env')
-app.config['SECRET_KEY'] = env_values['FLASK_SECRET_KEY']
+app.config['SECRET_KEY'] = "cfpigEAqwYpCwOUdf8KcTpYw5o5wTmN2"
 
 #Only accept requests that are up to 1MB in size
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
