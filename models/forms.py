@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField, TelField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, EmailField, TelField, FileField
 from wtforms.validators import DataRequired, InputRequired, EqualTo, Length
 
 class LoginForm(FlaskForm):
@@ -14,6 +14,7 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
 class ProfileForm(FlaskForm):
+    pic = FileField('Profile picture')
     fullname = StringField('Full name')
     email = EmailField('Email')
     phone = TelField('Phone')

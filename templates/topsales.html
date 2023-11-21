@@ -8,10 +8,42 @@ TOP 25
 
 <div class="container my-5">
 
-    <h1 class="text-center mb-5" >TOP 25 PRODUCTS</h1>
+    <h1 class="text-center mb-5">TOP 25 PRODUCTS</h1>
     <div class="d-flex flex-wrap justify-content-center">
-        {% for i in range(25) %}
-            {% include 'components/productcard.html' %}
+        {% for product in top %}
+        <div class="d-flex m-2">
+            <div class="card p-3 productcard">
+                <div class="mt-2 d-flex flex-column h-100">
+                    <div class="d-flex align-items-end justify-content-between">
+                        <img class="card-img-top" src="{{ product.media }}">
+                    </div>
+                    <div class="d-flex h-100 my-1">
+                        <div class="align-self-end w-100">
+                            <div class="d-flex">
+                                <h6>{{ product.characs['brand name'] }}</h6> - <h6>{{
+                                    product.category}}</h6>
+                            </div>
+                            <a href="{{url_for('productpage', p_id=product.pid)}}">
+                                <h5>{{ product.name }}</h5>
+                            </a>
+                            <div class="d-flex flex-row user-ratings gap-3">
+                                <div>
+                                    {% for i in range(product.stars) %}
+                                    <i class="fa fa-star" style="font: normal normal normal 20px/1 FontAwesome;"></i>
+                                    {% endfor %}
+                                </div>
+                                <h6 class="text-muted ml-1">{{ product.stars }}/5</h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <span style="font-size: 18px;">{{ product.price }}</span>
+                                <a href="{{url_for('add_cart', pid=product.pid)}}"
+                                    class="btn btn-warning mt-1">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>

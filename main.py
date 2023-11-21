@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request, abort
 from app import app, api
 from models.forms import *
 from models.tables import User
@@ -8,6 +8,8 @@ from managers.loginmanager import login_manager
 from api.flask_api import Product
 from ast import literal_eval
 from models.categories import get_categories
+from werkzeug.utils import secure_filename
+import os
 
 #Routes
 @app.route('/')
@@ -91,17 +93,29 @@ def userpage(user_id):
     profile_form = ProfileForm()
     delivery_form = DeliveryForm()
     if profile_form.validate_on_submit():
-        flash(models.crud.update_profile(profile_form, user_id))
+        uploaded_file = request.files['pic']
+        filename = secure_filename(uploaded_file.filename)
+        if filename != '':
+            file_ext = os.path.splitext(filename)[1]
+            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                abort(400)
+        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+
+        flash(models.crud.update_profile(profile_form, filename, user_id))
     if delivery_form.validate_on_submit():
         flash(models.crud.update_delivery(delivery_form, user_id))
+
+    last_order = literal_eval(models.crud.get_products(literal_eval(current_user.orders)[-1]))
     return render_template('userpage.html', 
                            user=current_user, 
                            profile_form=profile_form,
-                           delivery_form=delivery_form)
+                           delivery_form=delivery_form,
+                           last_order=last_order)
 
 @app.route('/topsales')
 def topsales():
-    return render_template('topsales.html')
+    top = models.crud.top25products()
+    return render_template('topsales.html', top = top)
 
 @app.route('/product/<int:p_id>')
 def productpage(p_id):

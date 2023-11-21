@@ -14,6 +14,13 @@ api = Api(app)
 env_values = dotenv_values('.env')
 app.config['SECRET_KEY'] = env_values['FLASK_SECRET_KEY']
 
+#Only accept requests that are up to 1MB in size
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+#Type of files that we accept
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
+#Upload path
+app.config['UPLOAD_PATH'] = 'static/uploads'
+
 #FOR DATABASE
 app.config['SQLALCHEMY_DATABASE_URI'] = env_values['MYSQL_CONNECTION']
 db = SQLAlchemy(app)

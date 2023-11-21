@@ -1,6 +1,7 @@
 from models.tables import Login, User, Product, db
 from datetime import datetime
 from ast import literal_eval
+from sqlalchemy import desc
 
 # Login
 def login(u:str, p:str):
@@ -18,15 +19,16 @@ def register(u:str, p:str):
     new_user = Login(u, p)
     db.session.add(new_user)
 
-    profile = User(email = "", name = u, avatar = "", phone = "", address = "", pcode = "", card = "{}", scart="[]", orders="")
+    profile = User(email = "", name = u, avatar = "https://e7.pngegg.com/pngimages/848/196/png-clipart-business-google-account-organization-service-avatar-angle-heroes.png", phone = "", address = "", pcode = "", card = "{}", scart="[]", orders="")
     db.session.add(profile)
 
     db.session.commit()
     return "User created."
 
 #Update profile
-def update_profile(form, id):    
+def update_profile(form, avatar, id): 
     db.session.query(User).filter_by(uid = id).update({
+        User.avatar: avatar,
         User.name: form.fullname.data, 
         User.email: form.email.data, 
         User.phone: form.phone.data, 
@@ -88,6 +90,11 @@ def get_products(id):
         return ans
     
     return str(Product.query.filter_by(pid=id).first())
+
+#Get Top25 products
+def top25products():
+    query = db.session.query(Product).order_by(desc(Product.demand)).all()[:25]
+    return query
 
 #Create product (available only from request (look in api/local))
 def add_product(args):

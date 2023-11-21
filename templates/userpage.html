@@ -37,7 +37,7 @@ JOHN
                                         class="d-none d-sm-inline">Top 25</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">All
+                                <a href="{{ url_for('home') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">All
                                         Products</span></a>
                             </li>
                         </ul>
@@ -131,7 +131,7 @@ JOHN
                         <div class="col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body text-center">
-                                    <img src="https://e7.pngegg.com/pngimages/848/196/png-clipart-business-google-account-organization-service-avatar-angle-heroes.png"
+                                    <img src="{{url_for('static', filename='uploads/'+ user.avatar) }}"
                                         alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                                     <h5 class="my-3">{{ user.name }}</h5>
                                     <p class="text-muted mb-1">Here is your personal page.</p>
@@ -158,7 +158,7 @@ JOHN
                         <div class="col-lg-8">
                             <div class="card h-100 mb-4">
                                 <div class="card-body">
-                                    <form method="post">
+                                    <form method="post" enctype="multipart/form-data">
                                         {{ profile_form.hidden_tag() }}
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -203,10 +203,52 @@ JOHN
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
+                                                <p class="mb-0">{{ profile_form.pic.label }}</p>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                {{ profile_form.pic(class="form-control", problemName="avatar") }}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
                                                 <p class="mb-0">Last order:</p>
                                             </div>
                                             <div class="col-sm-5">
-                                                <p class="text-muted mb-0">{{ user.orders }}</p>
+                                            {% with product_card = last_order %}
+                                            <div class="d-flex m-2">
+
+                                                <div class="card p-3 productcard">
+                                                    <div class="mt-2 d-flex flex-column h-100">
+                                                        <div class="d-flex align-items-end justify-content-between">
+                                                            <img class="card-img-top" src="{{ product_card['Media'] }}">
+                                                        </div>
+                                                        <div class="d-flex h-100 my-1">
+                                                            <div class="align-self-end w-100">
+                                                                <div class="d-flex">
+                                                                    <h6>{{ product_card['Characteristics']['brand name'] }}</h6> - <h6>{{ product_card['Category']}}</h6>
+                                                                </div>
+                                                                <a href="{{url_for('productpage', p_id=product_card['Product id'])}}">
+                                                                    <h5>{{ product_card['Name'] }}</h5>
+                                                                </a>
+                                                                <div class="d-flex flex-row user-ratings gap-3">
+                                                                    <div>
+                                                                        {% for i in range(product_card['Stars']) %}
+                                                                        <i class="fa fa-star" style="font: normal normal normal 20px/1 FontAwesome;"></i>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                    <h6 class="text-muted ml-1">{{ product_card['Stars'] }}/5</h6>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-between w-100">   
+                                                                    <span style="font-size: 18px;">{{ product_card['Price'] }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                            </div>
+                                            {% endwith %}
                                             </div>
                                         </div>
                                         {{ profile_form.submit(class="btn btn-warning") }}
