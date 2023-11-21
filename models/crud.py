@@ -156,3 +156,8 @@ def add_order(orders, uid):
 def get_category(c_name):
     result = db.session.query(Product).filter_by(category = c_name).all()
     return result
+
+#Search for product by its name
+def search_product(searched):
+    products = Product.query.filter(Product.name.like('%' + searched + '%')).order_by(Product.pid).all()
+    return products

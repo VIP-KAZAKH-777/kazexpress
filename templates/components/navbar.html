@@ -9,8 +9,7 @@
 
             <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
                 <div class="input-group">
-                    <span class="border-warning input-group-text bg-warning text-white"><i class="fa fa-search"
-                            style="color:white !important; 
+                    <span class="border-warning input-group-text bg-warning text-white"><i class="fa fa-search" style="color:white !important; 
                             font: normal normal normal 24px/1 FontAwesome;"></i></span>
                     <input type="text" class="form-control border-warning" style="color:#7a7a7a">
                     <button class="btn btn-warning text-white">Find</button>
@@ -18,25 +17,34 @@
             </div>
             <div class=" collapse navbar-collapse" id="navbarNavDropdown">
                 <div class="ms-auto w-50 d-none d-lg-block">
-                    <div class="input-group">
-                        <span class="border-warning input-group-text bg-warning text-white"><i class="fa fa-search"
-                                style="color:white !important; font: normal normal normal 24px/1 FontAwesome;"></i></span>
-                        <input type="text" class="form-control border-warning" style="color:#7a7a7a">
-                        <button class="btn btn-warning text-white">Find</button>
-                    </div>
+                    <form action="{{url_for('search')}}" method="post">
+                        <div class="input-group">
+                            {{ search_form.hidden_tag() }}
+                            <span class="border-warning input-group-text bg-warning text-white"><i class="fa fa-search"
+                                    style="color:white !important; font: normal normal normal 24px/1 FontAwesome;"></i></span>
+                            {{ search_form.searched(class="form-control border-warning", style="color:#7a7a7a") }}
+                            {{ search_form.submit(class="btn btn-warning") }}
+                        </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item">
-                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('orders', user_id=2) }}"><i class="fa fa-inbox" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('orders', user_id=2) }}"><i
+                                class="fa fa-inbox" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('cart', user_id=2) }}"><i class="fa fa-shopping-cart" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('cart', user_id=2) }}"><i
+                                class="fa fa-shopping-cart"
+                                style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
                     </li>
                     <li class="nav-item">
                         {% if current_user.is_authenticated %}
-                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('userpage', user_id=current_user.uid) }}"><i class="fa fa-user" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                        <a class="nav-link mx-2 text-uppercase"
+                            href="{{ url_for('userpage', user_id=current_user.uid) }}"><i class="fa fa-user"
+                                style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
                         {% else %}
-                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('login') }}"><i class="fa fa-user" style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
+                        <a class="nav-link mx-2 text-uppercase" href="{{ url_for('login') }}"><i class="fa fa-user"
+                                style="font: normal normal normal 32px/1 FontAwesome;"></i></a>
                         {% endif %}
                     </li>
                 </ul>

@@ -57,8 +57,12 @@ a:hover {
   transition: all .3s ease;
 }
 
-.sidebar a:hover {
-  background-color: blue;
+.sidebar a{
+  padding: 5px;
+}
+
+.sidebar a:hover i, .sidebar a:hover span{
+  color: blue;
 }
 
 /* Products */

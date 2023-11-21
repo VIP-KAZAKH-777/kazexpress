@@ -22,6 +22,14 @@ def home():
 
     return render_template('home.html', products=products, categories = get_categories())
 
+@app.route('/search', methods=['POST'])
+def search():
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        post = search_form.searched.data
+        products = models.crud.search_product(post)
+    return render_template('search.html', search_form=search_form, post=post, products = products, categories = get_categories())
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -148,3 +156,9 @@ def serv_err(e):
 
 #API
 api.add_resource(Product, "/api/product/<pid>")
+
+#Some global things
+@app.context_processor
+def navbar_search():
+    search_form = SearchForm()
+    return dict(search_form=search_form)
