@@ -1,43 +1,34 @@
 <div class="d-flex m-2">
 
-    <div class="card p-3">
-
-        <div class="justify-content-between">
-            <div class="mt-2">
-                <h4 class="text-uppercase">Ikea</h4>
-                <div class="mt-5">
-                    <h5 class="text-uppercase mb-0">Blanda Matt</h5>
-                    <a href="{{url_for('productpage', p_id=2)}}"><h1 class="main-heading mt-0">VASE</h1></a>
-                    <div class="d-flex flex-row user-ratings gap-2">
-                        <div class="ratings">
-                            {% for i in range(4) %}
-                            <i class="fa fa-star" style="font: normal normal normal 24px/1 FontAwesome;"></i>
+    <div class="card p-3 productcard">
+        <div class="mt-2 d-flex flex-column h-100">
+            <div class="d-flex align-items-end justify-content-between">
+                <img class="card-img-top" src="{{ product_card['Media'] }}">
+            </div>
+            <div class="d-flex h-100 my-1">
+                <div class="align-self-end w-100">
+                    <div class="d-flex">
+                        <h6>{{ product_card['Characteristics']['brand name'] }}</h6> - <h6>{{ product_card['Category']
+                            }}</h6>
+                    </div>
+                    <a href="{{url_for('productpage', p_id=product_card['Product id'])}}">
+                        <h5>{{ product_card['Name'] }}</h5>
+                    </a>
+                    <div class="d-flex flex-row user-ratings gap-3">
+                        <div>
+                            {% for i in range(product_card['Stars']) %}
+                            <i class="fa fa-star" style="font: normal normal normal 20px/1 FontAwesome;"></i>
                             {% endfor %}
                         </div>
-                        <h6 class="text-muted ml-1">4/5</h6>
+                        <h6 class="text-muted ml-1">{{ product_card['Stars'] }}/5</h6>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between w-100">   
+                        <span style="font-size: 18px;">{{ product_card['Price'] }}</span>
+                        <button class="btn btn-warning mt-1">Add to cart</button>
                     </div>
                 </div>
             </div>
-            <div class="image">
-                <img src="{{ url_for('static',filename='media/miska.png') }}" width="200">
-            </div>
         </div>
-
-        <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
-            <span>Available colors</span>
-            <div class="colors">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-        </div>
-
-
-        <p>A great option weather you are at office or at home. </p>
-
-        <button class="btn btn-warning">Add to cart</button>
     </div>
 
 </div>

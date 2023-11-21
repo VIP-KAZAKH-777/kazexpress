@@ -49,6 +49,17 @@ def update_delivery(form, id):
     except:
         return "Something went wrong."
     
+#Get all products or specific one
+def get_products(id):
+    if id == "all":
+        result = Product.query.all()
+        ans = []
+        for item in result:
+            ans.append(str(item))
+        return ans
+    
+    return str(Product.query.filter_by(pid=id).first())
+
 #Create product (available only from request (look in api/local))
 def add_product(args):
     product = Product(sid = args['sid'],
@@ -69,7 +80,24 @@ def add_product(args):
     except:
         return "Error, check serverside"
     
-#Get all products in JSON
-def get_products():
-    result = Product.query.all()
-    return result
+#Update product
+def update_product(args):
+    db.session.query(Product).filter_by(pid = args['pid']).update({
+        Product.pid: args['pid'],
+        Product.sid: args['sid'],
+        Product.category: args['category'],
+        Product.price: args['price'],
+        Product.name: args['name'],
+        Product.description: args['description'],
+        Product.media: args['media'],
+        Product.characs: args['characs'],
+        Product.reviews: args['reviews'],
+        Product.demand: args['demand'],
+        Product.stars: args['stars']
+        })     
+
+    try:
+        db.session.commit()
+        return "Product updated!"    
+    except:
+        return "Something went wrong."

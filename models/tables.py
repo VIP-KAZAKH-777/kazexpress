@@ -58,7 +58,7 @@ class Product(db.Model):
     stars = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<Name: %r>' %self.name
+        return "{" + f'"Product id": "{self.pid}", "Name": "{self.name}",  "Category": "{self.category}", "Price": "{self.price}", "Description": "{self.description}",  "Characteristics": {self.characs},  "Reviews": [{self.reviews}],  "Demand": {self.demand},  "Stars": {self.stars}, "Media": "{self.media}"' + "}"
 
 class Shop(db.Model):
     __tablename__="Shop"

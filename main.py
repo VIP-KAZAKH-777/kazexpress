@@ -1,16 +1,23 @@
-from flask import render_template, redirect, url_for, flash, session
+from flask import render_template, redirect, url_for, flash
 from app import app, api
 from models.forms import *
-from models.tables import Login, User
+from models.tables import User
 import models.crud
 from flask_login import login_user, login_required, logout_user, current_user
 from managers.loginmanager import login_manager
 from api.flask_api import Product
+from ast import literal_eval
 
 #Routes
 @app.route('/')
 def home():
-    return render_template('home.html')
+    product = models.crud.get_products('all')
+    products = []
+    for i in product:
+        mydict = literal_eval(i)
+        products.append(mydict)
+
+    return render_template('home.html', products=products)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -70,7 +77,8 @@ def topsales():
 
 @app.route('/product/<int:p_id>')
 def productpage(p_id):
-    return render_template('productpage.html')
+    product = literal_eval(models.crud.get_products(p_id))
+    return render_template('productpage.html', product = product)
 
 @app.route('/category/<c_name>')
 def categorized(c_name):

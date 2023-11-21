@@ -14,14 +14,6 @@
     border-radius: .25rem
 }
 
-.single_product {
-    padding-top: 66px;
-    padding-bottom: 140px;
-    background-color: #e5e5e5;
-    margin-top: 0px;
-    padding: 17px
-}
-
 .product_name {
     font-size: 20px;
     font-weight: 400;
@@ -347,11 +339,6 @@ div {
 ul {
     list-style: none;
     margin-bottom: 0px
-}
-
-.single_product {
-    padding-top: 16px;
-    padding-bottom: 140px
 }
 
 .image_list li {

@@ -29,8 +29,10 @@ HOME
 
 <div class="container d-flex flex-wrap py-5 justify-content-center">
 
-    {% for i in range(5) %}
-    {% include "components/productcard.html" %}
+    {% for product in products %}
+        {% with product_card=product %}
+            {% include "components/productcard.html" %}
+        {% endwith %}
     {% endfor %}
 
 
