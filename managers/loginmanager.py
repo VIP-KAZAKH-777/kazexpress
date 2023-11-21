@@ -1,4 +1,4 @@
-from app import app
+from flask_app import app
 from flask_login import LoginManager
 
 login_manager = LoginManager()
