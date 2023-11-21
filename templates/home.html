@@ -27,6 +27,16 @@ HOME
     </div>
 </div>
 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="list-unstyled text-success getover container">
+                    {% for message in messages %}
+                    <li><h3><strong>{{ message }}</strong></h3></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+
 <div class="container d-flex flex-wrap py-5 justify-content-center">
 
     {% for product in products %}

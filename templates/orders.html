@@ -6,15 +6,23 @@ ORDERS
 
 {% block content %}
 
-<div class="container my-5">
+<div class="container my-5 min-vh-100">
     <h1>Your orders.</h1>
-
-    <div class="d-flex">
-        {% if true %}
-        {% for i in range(3) %}
-        {% include 'components/productcard.html' %}
+    <h3>Here are the products you bought.</h3>
+    
+    <div class="d-flex container flex-wrap p-0">
+    {%if orders %}
+        {% for order in orders %}
+            {% with product_card = order %}
+                {% include "components/cartproduct.html" %}
+            {% endwith %}
         {% endfor %}
-        {% endif %}
+    </div>
+    {% else %}
+        <h3>You have no orders yet. <a href="{{url_for('home')}}">Look for products.</a></h3>
+        
+    {% endif %}
+    <div class="d-flex">
     </div>
 </div>
 

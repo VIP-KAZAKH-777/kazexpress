@@ -1,5 +1,6 @@
 from models.tables import Login, User, Product, db
 from datetime import datetime
+from ast import literal_eval
 
 # Login
 def login(u:str, p:str):
@@ -37,6 +38,34 @@ def update_profile(form, id):
     except:
         return "Something went wrong."
     
+#Add product to cart
+def add_to_cart(pid, user):
+    current_cart = literal_eval(user.scart)
+    if pid in current_cart:
+        return "Already have."
+    current_cart.append(pid)
+    db.session.query(User).filter_by(uid = user.uid).update({
+        User.scart: f"{current_cart}"})  
+    
+    try:
+        db.session.commit()
+        return "Added to cart!"
+    except: 
+        return "Something went wrong."
+
+#Delete product from cart
+def del_from_cart(pid, user):
+    current_cart = literal_eval(user.scart)
+    current_cart.remove(pid)
+    db.session.query(User).filter_by(uid = user.uid).update({
+        User.scart: f"{current_cart}"})  
+    
+    try:
+        db.session.commit()
+        return "Deleted from cart!"
+    except: 
+        return "Something went wrong."
+
 #Update delivery info
 def update_delivery(form, id):
     db.session.query(User).filter_by(uid = id).update({
@@ -102,6 +131,20 @@ def update_product(args):
     except:
         return "Something went wrong."
     
+#Add order
+def add_order(orders, uid):
+    db.session.query(User).filter_by(uid = uid).update({
+        #Let's clear users cart and add them to orders
+        User.scart: '[]',
+        User.orders: f'{orders}'})
+
+    
+    try:
+        db.session.commit()
+        return "Orders updated!"    
+    except:
+        return "Something went wrong."
+
 #Get products by category
 def get_category(c_name):
     result = db.session.query(Product).filter_by(category = c_name).all()

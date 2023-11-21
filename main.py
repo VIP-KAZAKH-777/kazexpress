@@ -52,11 +52,38 @@ def register():
 
 @app.route('/cart/<int:user_id>')
 def cart(user_id):
-    return render_template('cart.html')
+    cart=literal_eval(current_user.scart)
+    forweb = []
+    products = []
+    for i in cart:
+        if i not in forweb:
+            forweb.append(i)
+            products.append(literal_eval(models.crud.get_products(i)))
+        
+    return render_template('cart.html', products=products, orders=forweb)
+
+@app.route('/cart/add/<int:pid>')
+def add_cart(pid):
+    flash(models.crud.add_to_cart(pid, current_user))
+    return redirect(url_for('home'))
+
+@app.route('/cart/del/<int:pid>')
+def del_from_cart(pid):
+    flash(models.crud.del_from_cart(pid, current_user))
+    return redirect(url_for('cart', user_id=current_user.uid))
 
 @app.route('/orders/<int:user_id>')
 def orders(user_id):
-    return render_template('orders.html')
+    orders=literal_eval(current_user.orders)
+    products = []
+    for i in orders:
+        products.append(literal_eval(models.crud.get_products(i)))
+    return render_template('orders.html', user=current_user, orders = products)
+
+@app.route('/order/<orders>')
+def makeorder(orders):
+    models.crud.add_order(orders, current_user.uid)
+    return redirect(url_for('orders', user_id=current_user.uid))
 
 @app.route('/user/<int:user_id>', methods=["GET", "POST"])
 @login_required
@@ -79,7 +106,7 @@ def topsales():
 @app.route('/product/<int:p_id>')
 def productpage(p_id):
     product = literal_eval(models.crud.get_products(p_id))
-    return render_template('productpage.html', product = product)
+    return render_template('productpage.html', product = product, categories = get_categories())
 
 @app.route('/category/<c_name>')
 def categorized(c_name):

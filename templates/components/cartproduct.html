@@ -23,7 +23,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between w-100">   
                         <span style="font-size: 18px;">{{ product_card['Price'] }}</span>
-                        <a href="{{url_for('add_cart', pid=product_card['Product id'])}}" class="btn btn-warning mt-1">Add to cart</a>
+                        <a href="{{url_for('del_from_cart', pid=product_card['Product id'])}}"><i class="fs-3 bi-trash text-warning"></i></a>
                     </div>
                 </div>
             </div>

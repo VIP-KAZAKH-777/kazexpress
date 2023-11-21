@@ -6,15 +6,24 @@ CART
 
 {% block content %}
 
-<div class="container my-5">
+<div class="container my-5 min-vh-100">
     <h1>Your shopping cart.</h1>
 
-    <div class="d-flex">
-        {% if true %}
-        {% for i in range(3) %}
-        {% include 'components/productcard.html' %}
+    {%if products%}
+    <div class="d-flex container flex-wrap p-0">
+        {% for i in products%}
+            {% with product_card=i %}
+                {% include "components/cartproduct.html" %}
+            {% endwith %}
         {% endfor %}
-        {% endif %}
     </div>
+    <div class="container my-3">
+        <h2>Total: A lot of money.</h2>
+        <a href="{{url_for('makeorder', orders=orders)}}" class="btn btn-warning">Order</a>
+    </div>
+    {% else %}
+        <h3>You have no products in the cart yet. <a href="{{url_for('home')}}">Look for products.</a></h3>
+        
+    {% endif %}
 </div>
 {% endblock %}

@@ -71,3 +71,15 @@ a:hover {
   max-height: 150px;
   object-fit: contain;
 }
+
+/* Flash removing */
+.getover {
+  animation: hideFlash 4s forwards;
+}
+
+@keyframes hideFlash {
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
