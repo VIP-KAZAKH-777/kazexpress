@@ -22,5 +22,5 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 app.config['UPLOAD_PATH'] = 'static/uploads'
 
 #FOR DATABASE
-app.config['SQLALCHEMY_DATABASE_URI'] = env_values['MYSQL_CONNECTION']
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://sql12662982:zeLHvUa2UV@sql12.freesqldatabase.com/sql12662982"
 db = SQLAlchemy(app)
