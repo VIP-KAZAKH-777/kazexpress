@@ -16,7 +16,9 @@ class Login(db.Model, UserMixin):
         self.password = bcrypt.hashpw(p.encode('utf-8'), bcrypt.gensalt())
 
     def check_password(self, p):
-        return bcrypt.checkpw(p.encode('utf-8'), self.password.encode('utf-8'))
+        if bcrypt.checkpw(p.encode('utf-8'), self.password.encode('utf-8')):
+            return True
+        return False
 
     def get_id(self):
            return (self.uid)

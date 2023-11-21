@@ -19,7 +19,7 @@ def register(u:str, p:str):
     new_user = Login(u, p)
     db.session.add(new_user)
 
-    profile = User(email = "", name = u, avatar = "https://e7.pngegg.com/pngimages/848/196/png-clipart-business-google-account-organization-service-avatar-angle-heroes.png", phone = "", address = "", pcode = "", card = "{}", scart="[]", orders="")
+    profile = User(email = "", name = u, avatar = "defalt_user_profile.jpg", phone = "", address = "", pcode = "", card = "{}", scart="[]", orders="")
     db.session.add(profile)
 
     db.session.commit()

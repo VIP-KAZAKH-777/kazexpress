@@ -58,9 +58,14 @@ def register():
     if form.validate_on_submit():
         result = models.crud.register(form.username.data, form.password.data)
         flash(result)
+        if result == "User already exists.":
+            return render_template('register.html', form=form)
+        else:
+            return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
 @app.route('/cart/<int:user_id>')
+@login_required
 def cart(user_id):
     cart=literal_eval(current_user.scart)
     forweb = []
@@ -69,10 +74,10 @@ def cart(user_id):
         if i not in forweb:
             forweb.append(i)
             products.append(literal_eval(models.crud.get_products(i)))
-        
     return render_template('cart.html', products=products, orders=forweb)
 
 @app.route('/cart/add/<int:pid>')
+@login_required
 def add_cart(pid):
     flash(models.crud.add_to_cart(pid, current_user))
     return redirect(url_for('home'))
@@ -83,6 +88,7 @@ def del_from_cart(pid):
     return redirect(url_for('cart', user_id=current_user.uid))
 
 @app.route('/orders/<int:user_id>')
+@login_required
 def orders(user_id):
     orders=literal_eval(current_user.orders)
     products = []
@@ -113,7 +119,10 @@ def userpage(user_id):
     if delivery_form.validate_on_submit():
         flash(models.crud.update_delivery(delivery_form, user_id))
 
-    last_order = literal_eval(models.crud.get_products(literal_eval(current_user.orders)[-1]))
+    if current_user.orders:
+        last_order = literal_eval(models.crud.get_products(literal_eval(current_user.orders)[-1]))
+    else:
+        last_order = None
     return render_template('userpage.html', 
                            user=current_user, 
                            profile_form=profile_form,

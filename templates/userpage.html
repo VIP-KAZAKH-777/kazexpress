@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-JOHN
+{{user.name}}
 {% endblock %}
 
 {% block content %}
@@ -215,6 +215,7 @@ JOHN
                                                 <p class="mb-0">Last order:</p>
                                             </div>
                                             <div class="col-sm-5">
+                                                {% if last_order %}
                                             {% with product_card = last_order %}
                                             <div class="d-flex m-2">
 
@@ -249,6 +250,9 @@ JOHN
                                             
                                             </div>
                                             {% endwith %}
+                                            {% else %}
+                                            <p>No orders yet.</p>
+                                            {% endif %}
                                             </div>
                                         </div>
                                         {{ profile_form.submit(class="btn btn-warning") }}
